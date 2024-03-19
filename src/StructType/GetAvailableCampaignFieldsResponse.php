@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getAvailableCampaignFields --- returns the available fields for the Mis campaign
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetAvailableCampaignFieldsResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetAvailableCampaignFieldsResponse extends AbstractStructBase
      * - ref: MidocoCampaignFieldExt
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoCampaignFieldExt[]
      */
-    protected array $MidocoCampaignFieldExt = [];
+    protected ?array $MidocoCampaignFieldExt = null;
     /**
      * Constructor method for GetAvailableCampaignFieldsResponse
      * @uses GetAvailableCampaignFieldsResponse::setMidocoCampaignFieldExt()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCampaignFieldExt[] $midocoCampaignFieldExt
      */
-    public function __construct(array $midocoCampaignFieldExt = [])
+    public function __construct(?array $midocoCampaignFieldExt = null)
     {
         $this
             ->setMidocoCampaignFieldExt($midocoCampaignFieldExt);
@@ -38,18 +39,22 @@ class GetAvailableCampaignFieldsResponse extends AbstractStructBase
      * Get MidocoCampaignFieldExt value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoCampaignFieldExt[]
      */
-    public function getMidocoCampaignFieldExt(): array
+    public function getMidocoCampaignFieldExt(): ?array
     {
         return $this->MidocoCampaignFieldExt;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoCampaignFieldExt method
+     * This method is responsible for validating the value(s) passed to the setMidocoCampaignFieldExt method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoCampaignFieldExt method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoCampaignFieldExtForArrayConstraintsFromSetMidocoCampaignFieldExt(array $values = []): string
+    public static function validateMidocoCampaignFieldExtForArrayConstraintFromSetMidocoCampaignFieldExt(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAvailableCampaignFieldsResponseMidocoCampaignFieldExtItem) {
@@ -71,10 +76,10 @@ class GetAvailableCampaignFieldsResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCampaignFieldExt[] $midocoCampaignFieldExt
      * @return \Pggns\MidocoApi\Mis\StructType\GetAvailableCampaignFieldsResponse
      */
-    public function setMidocoCampaignFieldExt(array $midocoCampaignFieldExt = []): self
+    public function setMidocoCampaignFieldExt(?array $midocoCampaignFieldExt = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoCampaignFieldExtArrayErrorMessage = self::validateMidocoCampaignFieldExtForArrayConstraintsFromSetMidocoCampaignFieldExt($midocoCampaignFieldExt))) {
+        if ('' !== ($midocoCampaignFieldExtArrayErrorMessage = self::validateMidocoCampaignFieldExtForArrayConstraintFromSetMidocoCampaignFieldExt($midocoCampaignFieldExt))) {
             throw new InvalidArgumentException($midocoCampaignFieldExtArrayErrorMessage, __LINE__);
         }
         $this->MidocoCampaignFieldExt = $midocoCampaignFieldExt;

@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for ListAsCampaignRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class ListAsCampaignRequest extends AbstractStructBase
 {
     /**
@@ -27,7 +28,7 @@ class ListAsCampaignRequest extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $campaignData = [];
+    protected ?array $campaignData = null;
     /**
      * The campaignDescription
      * Meta information extracted from the WSDL
@@ -44,7 +45,7 @@ class ListAsCampaignRequest extends AbstractStructBase
      * @param int[] $campaignData
      * @param string $campaignDescription
      */
-    public function __construct(?string $queryType = null, array $campaignData = [], ?string $campaignDescription = null)
+    public function __construct(?string $queryType = null, ?array $campaignData = null, ?string $campaignDescription = null)
     {
         $this
             ->setQueryType($queryType)
@@ -78,18 +79,22 @@ class ListAsCampaignRequest extends AbstractStructBase
      * Get campaignData value
      * @return int[]
      */
-    public function getCampaignData(): array
+    public function getCampaignData(): ?array
     {
         return $this->campaignData;
     }
     /**
-     * This method is responsible for validating the values passed to the setCampaignData method
+     * This method is responsible for validating the value(s) passed to the setCampaignData method
      * This method is willingly generated in order to preserve the one-line inline validation within the setCampaignData method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCampaignDataForArrayConstraintsFromSetCampaignData(array $values = []): string
+    public static function validateCampaignDataForArrayConstraintFromSetCampaignData(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $listAsCampaignRequestCampaignDataItem) {
@@ -111,10 +116,10 @@ class ListAsCampaignRequest extends AbstractStructBase
      * @param int[] $campaignData
      * @return \Pggns\MidocoApi\Mis\StructType\ListAsCampaignRequest
      */
-    public function setCampaignData(array $campaignData = []): self
+    public function setCampaignData(?array $campaignData = null): self
     {
         // validation for constraint: array
-        if ('' !== ($campaignDataArrayErrorMessage = self::validateCampaignDataForArrayConstraintsFromSetCampaignData($campaignData))) {
+        if ('' !== ($campaignDataArrayErrorMessage = self::validateCampaignDataForArrayConstraintFromSetCampaignData($campaignData))) {
             throw new InvalidArgumentException($campaignDataArrayErrorMessage, __LINE__);
         }
         $this->campaignData = $campaignData;

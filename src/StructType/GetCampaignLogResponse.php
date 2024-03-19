@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getCampaignLog --- return a protocol of a previously executed Email/SMS campaign
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetCampaignLogResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetCampaignLogResponse extends AbstractStructBase
      * - ref: MidocoLogEntry
      * @var \Pggns\MidocoApi\Mis\StructType\LogentryDTO[]
      */
-    protected array $MidocoLogEntry = [];
+    protected ?array $MidocoLogEntry = null;
     /**
      * Constructor method for GetCampaignLogResponse
      * @uses GetCampaignLogResponse::setMidocoLogEntry()
      * @param \Pggns\MidocoApi\Mis\StructType\LogentryDTO[] $midocoLogEntry
      */
-    public function __construct(array $midocoLogEntry = [])
+    public function __construct(?array $midocoLogEntry = null)
     {
         $this
             ->setMidocoLogEntry($midocoLogEntry);
@@ -38,18 +39,22 @@ class GetCampaignLogResponse extends AbstractStructBase
      * Get MidocoLogEntry value
      * @return \Pggns\MidocoApi\Mis\StructType\LogentryDTO[]
      */
-    public function getMidocoLogEntry(): array
+    public function getMidocoLogEntry(): ?array
     {
         return $this->MidocoLogEntry;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoLogEntry method
+     * This method is responsible for validating the value(s) passed to the setMidocoLogEntry method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoLogEntry method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoLogEntryForArrayConstraintsFromSetMidocoLogEntry(array $values = []): string
+    public static function validateMidocoLogEntryForArrayConstraintFromSetMidocoLogEntry(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCampaignLogResponseMidocoLogEntryItem) {
@@ -71,10 +76,10 @@ class GetCampaignLogResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\LogentryDTO[] $midocoLogEntry
      * @return \Pggns\MidocoApi\Mis\StructType\GetCampaignLogResponse
      */
-    public function setMidocoLogEntry(array $midocoLogEntry = []): self
+    public function setMidocoLogEntry(?array $midocoLogEntry = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoLogEntryArrayErrorMessage = self::validateMidocoLogEntryForArrayConstraintsFromSetMidocoLogEntry($midocoLogEntry))) {
+        if ('' !== ($midocoLogEntryArrayErrorMessage = self::validateMidocoLogEntryForArrayConstraintFromSetMidocoLogEntry($midocoLogEntry))) {
             throw new InvalidArgumentException($midocoLogEntryArrayErrorMessage, __LINE__);
         }
         $this->MidocoLogEntry = $midocoLogEntry;

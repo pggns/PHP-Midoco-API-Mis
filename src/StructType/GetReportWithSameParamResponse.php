@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for GetReportWithSameParamResponse StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetReportWithSameParamResponse extends AbstractStructBase
 {
     /**
@@ -20,13 +21,13 @@ class GetReportWithSameParamResponse extends AbstractStructBase
      * - ref: system:JasperReport
      * @var \Pggns\MidocoApi\Mis\StructType\JasperReport[]
      */
-    protected array $JasperReport = [];
+    protected ?array $JasperReport = null;
     /**
      * Constructor method for GetReportWithSameParamResponse
      * @uses GetReportWithSameParamResponse::setJasperReport()
      * @param \Pggns\MidocoApi\Mis\StructType\JasperReport[] $jasperReport
      */
-    public function __construct(array $jasperReport = [])
+    public function __construct(?array $jasperReport = null)
     {
         $this
             ->setJasperReport($jasperReport);
@@ -35,18 +36,22 @@ class GetReportWithSameParamResponse extends AbstractStructBase
      * Get JasperReport value
      * @return \Pggns\MidocoApi\Mis\StructType\JasperReport[]
      */
-    public function getJasperReport(): array
+    public function getJasperReport(): ?array
     {
         return $this->JasperReport;
     }
     /**
-     * This method is responsible for validating the values passed to the setJasperReport method
+     * This method is responsible for validating the value(s) passed to the setJasperReport method
      * This method is willingly generated in order to preserve the one-line inline validation within the setJasperReport method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateJasperReportForArrayConstraintsFromSetJasperReport(array $values = []): string
+    public static function validateJasperReportForArrayConstraintFromSetJasperReport(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getReportWithSameParamResponseJasperReportItem) {
@@ -68,10 +73,10 @@ class GetReportWithSameParamResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\JasperReport[] $jasperReport
      * @return \Pggns\MidocoApi\Mis\StructType\GetReportWithSameParamResponse
      */
-    public function setJasperReport(array $jasperReport = []): self
+    public function setJasperReport(?array $jasperReport = null): self
     {
         // validation for constraint: array
-        if ('' !== ($jasperReportArrayErrorMessage = self::validateJasperReportForArrayConstraintsFromSetJasperReport($jasperReport))) {
+        if ('' !== ($jasperReportArrayErrorMessage = self::validateJasperReportForArrayConstraintFromSetJasperReport($jasperReport))) {
             throw new InvalidArgumentException($jasperReportArrayErrorMessage, __LINE__);
         }
         $this->JasperReport = $jasperReport;

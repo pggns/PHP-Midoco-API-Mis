@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for MidocoJasperReportParamList StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class MidocoJasperReportParamList extends AbstractStructBase
 {
     /**
@@ -20,13 +21,13 @@ class MidocoJasperReportParamList extends AbstractStructBase
      * - ref: system:MidocoJasperReportParamValue
      * @var \Pggns\MidocoApi\Mis\StructType\JasperReportParamValueDTO[]
      */
-    protected array $MidocoJasperReportParamValue = [];
+    protected ?array $MidocoJasperReportParamValue = null;
     /**
      * Constructor method for MidocoJasperReportParamList
      * @uses MidocoJasperReportParamList::setMidocoJasperReportParamValue()
      * @param \Pggns\MidocoApi\Mis\StructType\JasperReportParamValueDTO[] $midocoJasperReportParamValue
      */
-    public function __construct(array $midocoJasperReportParamValue = [])
+    public function __construct(?array $midocoJasperReportParamValue = null)
     {
         $this
             ->setMidocoJasperReportParamValue($midocoJasperReportParamValue);
@@ -35,18 +36,22 @@ class MidocoJasperReportParamList extends AbstractStructBase
      * Get MidocoJasperReportParamValue value
      * @return \Pggns\MidocoApi\Mis\StructType\JasperReportParamValueDTO[]
      */
-    public function getMidocoJasperReportParamValue(): array
+    public function getMidocoJasperReportParamValue(): ?array
     {
         return $this->MidocoJasperReportParamValue;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoJasperReportParamValue method
+     * This method is responsible for validating the value(s) passed to the setMidocoJasperReportParamValue method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoJasperReportParamValue method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoJasperReportParamValueForArrayConstraintsFromSetMidocoJasperReportParamValue(array $values = []): string
+    public static function validateMidocoJasperReportParamValueForArrayConstraintFromSetMidocoJasperReportParamValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $midocoJasperReportParamListMidocoJasperReportParamValueItem) {
@@ -68,10 +73,10 @@ class MidocoJasperReportParamList extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\JasperReportParamValueDTO[] $midocoJasperReportParamValue
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoJasperReportParamList
      */
-    public function setMidocoJasperReportParamValue(array $midocoJasperReportParamValue = []): self
+    public function setMidocoJasperReportParamValue(?array $midocoJasperReportParamValue = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoJasperReportParamValueArrayErrorMessage = self::validateMidocoJasperReportParamValueForArrayConstraintsFromSetMidocoJasperReportParamValue($midocoJasperReportParamValue))) {
+        if ('' !== ($midocoJasperReportParamValueArrayErrorMessage = self::validateMidocoJasperReportParamValueForArrayConstraintFromSetMidocoJasperReportParamValue($midocoJasperReportParamValue))) {
             throw new InvalidArgumentException($midocoJasperReportParamValueArrayErrorMessage, __LINE__);
         }
         $this->MidocoJasperReportParamValue = $midocoJasperReportParamValue;

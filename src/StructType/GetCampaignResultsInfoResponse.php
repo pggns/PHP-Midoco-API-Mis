@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for GetCampaignResultsInfoResponse StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetCampaignResultsInfoResponse extends AbstractStructBase
 {
     /**
@@ -21,13 +22,13 @@ class GetCampaignResultsInfoResponse extends AbstractStructBase
      * - ref: CampaignResultsInfo
      * @var \Pggns\MidocoApi\Mis\StructType\CampaignResultsInfo[]
      */
-    protected array $CampaignResultsInfo = [];
+    protected ?array $CampaignResultsInfo = null;
     /**
      * Constructor method for GetCampaignResultsInfoResponse
      * @uses GetCampaignResultsInfoResponse::setCampaignResultsInfo()
      * @param \Pggns\MidocoApi\Mis\StructType\CampaignResultsInfo[] $campaignResultsInfo
      */
-    public function __construct(array $campaignResultsInfo = [])
+    public function __construct(?array $campaignResultsInfo = null)
     {
         $this
             ->setCampaignResultsInfo($campaignResultsInfo);
@@ -36,18 +37,22 @@ class GetCampaignResultsInfoResponse extends AbstractStructBase
      * Get CampaignResultsInfo value
      * @return \Pggns\MidocoApi\Mis\StructType\CampaignResultsInfo[]
      */
-    public function getCampaignResultsInfo(): array
+    public function getCampaignResultsInfo(): ?array
     {
         return $this->CampaignResultsInfo;
     }
     /**
-     * This method is responsible for validating the values passed to the setCampaignResultsInfo method
+     * This method is responsible for validating the value(s) passed to the setCampaignResultsInfo method
      * This method is willingly generated in order to preserve the one-line inline validation within the setCampaignResultsInfo method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCampaignResultsInfoForArrayConstraintsFromSetCampaignResultsInfo(array $values = []): string
+    public static function validateCampaignResultsInfoForArrayConstraintFromSetCampaignResultsInfo(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCampaignResultsInfoResponseCampaignResultsInfoItem) {
@@ -69,10 +74,10 @@ class GetCampaignResultsInfoResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CampaignResultsInfo[] $campaignResultsInfo
      * @return \Pggns\MidocoApi\Mis\StructType\GetCampaignResultsInfoResponse
      */
-    public function setCampaignResultsInfo(array $campaignResultsInfo = []): self
+    public function setCampaignResultsInfo(?array $campaignResultsInfo = null): self
     {
         // validation for constraint: array
-        if ('' !== ($campaignResultsInfoArrayErrorMessage = self::validateCampaignResultsInfoForArrayConstraintsFromSetCampaignResultsInfo($campaignResultsInfo))) {
+        if ('' !== ($campaignResultsInfoArrayErrorMessage = self::validateCampaignResultsInfoForArrayConstraintFromSetCampaignResultsInfo($campaignResultsInfo))) {
             throw new InvalidArgumentException($campaignResultsInfoArrayErrorMessage, __LINE__);
         }
         $this->CampaignResultsInfo = $campaignResultsInfo;

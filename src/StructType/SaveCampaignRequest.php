@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for SaveCampaignRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class SaveCampaignRequest extends AbstractStructBase
 {
     /**
@@ -28,7 +29,7 @@ class SaveCampaignRequest extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $orgUnit = [];
+    protected ?array $orgUnit = null;
     /**
      * The estimatedNoOfResults
      * Meta information extracted from the WSDL
@@ -36,7 +37,7 @@ class SaveCampaignRequest extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $estimatedNoOfResults = [];
+    protected ?array $estimatedNoOfResults = null;
     /**
      * The estimatedOrgUnit
      * Meta information extracted from the WSDL
@@ -44,7 +45,7 @@ class SaveCampaignRequest extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $estimatedOrgUnit = [];
+    protected ?array $estimatedOrgUnit = null;
     /**
      * The CustomerReference
      * Meta information extracted from the WSDL
@@ -53,7 +54,7 @@ class SaveCampaignRequest extends AbstractStructBase
      * - ref: CustomerReference
      * @var \Pggns\MidocoApi\Mis\StructType\CustomerReference[]
      */
-    protected array $CustomerReference = [];
+    protected ?array $CustomerReference = null;
     /**
      * The type
      * @var string|null
@@ -74,7 +75,7 @@ class SaveCampaignRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CustomerReference[] $customerReference
      * @param string $type
      */
-    public function __construct(?\Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign $midocoMisCampaign = null, array $orgUnit = [], array $estimatedNoOfResults = [], array $estimatedOrgUnit = [], array $customerReference = [], ?string $type = null)
+    public function __construct(?\Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign $midocoMisCampaign = null, ?array $orgUnit = null, ?array $estimatedNoOfResults = null, ?array $estimatedOrgUnit = null, ?array $customerReference = null, ?string $type = null)
     {
         $this
             ->setMidocoMisCampaign($midocoMisCampaign)
@@ -107,18 +108,22 @@ class SaveCampaignRequest extends AbstractStructBase
      * Get orgUnit value
      * @return string[]
      */
-    public function getOrgUnit(): array
+    public function getOrgUnit(): ?array
     {
         return $this->orgUnit;
     }
     /**
-     * This method is responsible for validating the values passed to the setOrgUnit method
+     * This method is responsible for validating the value(s) passed to the setOrgUnit method
      * This method is willingly generated in order to preserve the one-line inline validation within the setOrgUnit method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateOrgUnitForArrayConstraintsFromSetOrgUnit(array $values = []): string
+    public static function validateOrgUnitForArrayConstraintFromSetOrgUnit(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $saveCampaignRequestOrgUnitItem) {
@@ -140,10 +145,10 @@ class SaveCampaignRequest extends AbstractStructBase
      * @param string[] $orgUnit
      * @return \Pggns\MidocoApi\Mis\StructType\SaveCampaignRequest
      */
-    public function setOrgUnit(array $orgUnit = []): self
+    public function setOrgUnit(?array $orgUnit = null): self
     {
         // validation for constraint: array
-        if ('' !== ($orgUnitArrayErrorMessage = self::validateOrgUnitForArrayConstraintsFromSetOrgUnit($orgUnit))) {
+        if ('' !== ($orgUnitArrayErrorMessage = self::validateOrgUnitForArrayConstraintFromSetOrgUnit($orgUnit))) {
             throw new InvalidArgumentException($orgUnitArrayErrorMessage, __LINE__);
         }
         $this->orgUnit = $orgUnit;
@@ -170,18 +175,22 @@ class SaveCampaignRequest extends AbstractStructBase
      * Get estimatedNoOfResults value
      * @return int[]
      */
-    public function getEstimatedNoOfResults(): array
+    public function getEstimatedNoOfResults(): ?array
     {
         return $this->estimatedNoOfResults;
     }
     /**
-     * This method is responsible for validating the values passed to the setEstimatedNoOfResults method
+     * This method is responsible for validating the value(s) passed to the setEstimatedNoOfResults method
      * This method is willingly generated in order to preserve the one-line inline validation within the setEstimatedNoOfResults method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEstimatedNoOfResultsForArrayConstraintsFromSetEstimatedNoOfResults(array $values = []): string
+    public static function validateEstimatedNoOfResultsForArrayConstraintFromSetEstimatedNoOfResults(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $saveCampaignRequestEstimatedNoOfResultsItem) {
@@ -203,10 +212,10 @@ class SaveCampaignRequest extends AbstractStructBase
      * @param int[] $estimatedNoOfResults
      * @return \Pggns\MidocoApi\Mis\StructType\SaveCampaignRequest
      */
-    public function setEstimatedNoOfResults(array $estimatedNoOfResults = []): self
+    public function setEstimatedNoOfResults(?array $estimatedNoOfResults = null): self
     {
         // validation for constraint: array
-        if ('' !== ($estimatedNoOfResultsArrayErrorMessage = self::validateEstimatedNoOfResultsForArrayConstraintsFromSetEstimatedNoOfResults($estimatedNoOfResults))) {
+        if ('' !== ($estimatedNoOfResultsArrayErrorMessage = self::validateEstimatedNoOfResultsForArrayConstraintFromSetEstimatedNoOfResults($estimatedNoOfResults))) {
             throw new InvalidArgumentException($estimatedNoOfResultsArrayErrorMessage, __LINE__);
         }
         $this->estimatedNoOfResults = $estimatedNoOfResults;
@@ -233,18 +242,22 @@ class SaveCampaignRequest extends AbstractStructBase
      * Get estimatedOrgUnit value
      * @return string[]
      */
-    public function getEstimatedOrgUnit(): array
+    public function getEstimatedOrgUnit(): ?array
     {
         return $this->estimatedOrgUnit;
     }
     /**
-     * This method is responsible for validating the values passed to the setEstimatedOrgUnit method
+     * This method is responsible for validating the value(s) passed to the setEstimatedOrgUnit method
      * This method is willingly generated in order to preserve the one-line inline validation within the setEstimatedOrgUnit method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEstimatedOrgUnitForArrayConstraintsFromSetEstimatedOrgUnit(array $values = []): string
+    public static function validateEstimatedOrgUnitForArrayConstraintFromSetEstimatedOrgUnit(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $saveCampaignRequestEstimatedOrgUnitItem) {
@@ -266,10 +279,10 @@ class SaveCampaignRequest extends AbstractStructBase
      * @param string[] $estimatedOrgUnit
      * @return \Pggns\MidocoApi\Mis\StructType\SaveCampaignRequest
      */
-    public function setEstimatedOrgUnit(array $estimatedOrgUnit = []): self
+    public function setEstimatedOrgUnit(?array $estimatedOrgUnit = null): self
     {
         // validation for constraint: array
-        if ('' !== ($estimatedOrgUnitArrayErrorMessage = self::validateEstimatedOrgUnitForArrayConstraintsFromSetEstimatedOrgUnit($estimatedOrgUnit))) {
+        if ('' !== ($estimatedOrgUnitArrayErrorMessage = self::validateEstimatedOrgUnitForArrayConstraintFromSetEstimatedOrgUnit($estimatedOrgUnit))) {
             throw new InvalidArgumentException($estimatedOrgUnitArrayErrorMessage, __LINE__);
         }
         $this->estimatedOrgUnit = $estimatedOrgUnit;
@@ -296,18 +309,22 @@ class SaveCampaignRequest extends AbstractStructBase
      * Get CustomerReference value
      * @return \Pggns\MidocoApi\Mis\StructType\CustomerReference[]
      */
-    public function getCustomerReference(): array
+    public function getCustomerReference(): ?array
     {
         return $this->CustomerReference;
     }
     /**
-     * This method is responsible for validating the values passed to the setCustomerReference method
+     * This method is responsible for validating the value(s) passed to the setCustomerReference method
      * This method is willingly generated in order to preserve the one-line inline validation within the setCustomerReference method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCustomerReferenceForArrayConstraintsFromSetCustomerReference(array $values = []): string
+    public static function validateCustomerReferenceForArrayConstraintFromSetCustomerReference(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $saveCampaignRequestCustomerReferenceItem) {
@@ -329,10 +346,10 @@ class SaveCampaignRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CustomerReference[] $customerReference
      * @return \Pggns\MidocoApi\Mis\StructType\SaveCampaignRequest
      */
-    public function setCustomerReference(array $customerReference = []): self
+    public function setCustomerReference(?array $customerReference = null): self
     {
         // validation for constraint: array
-        if ('' !== ($customerReferenceArrayErrorMessage = self::validateCustomerReferenceForArrayConstraintsFromSetCustomerReference($customerReference))) {
+        if ('' !== ($customerReferenceArrayErrorMessage = self::validateCustomerReferenceForArrayConstraintFromSetCustomerReference($customerReference))) {
             throw new InvalidArgumentException($customerReferenceArrayErrorMessage, __LINE__);
         }
         $this->CustomerReference = $customerReference;

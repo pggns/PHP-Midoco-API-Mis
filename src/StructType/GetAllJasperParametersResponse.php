@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getAllJasperParameters --- return all the parameters (standard, not standard, or all)
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetAllJasperParametersResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetAllJasperParametersResponse extends AbstractStructBase
      * - ref: system:MidocoJasperParameterForDisplay
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoJasperParameterForDisplay[]
      */
-    protected array $MidocoJasperParameterForDisplay = [];
+    protected ?array $MidocoJasperParameterForDisplay = null;
     /**
      * Constructor method for GetAllJasperParametersResponse
      * @uses GetAllJasperParametersResponse::setMidocoJasperParameterForDisplay()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoJasperParameterForDisplay[] $midocoJasperParameterForDisplay
      */
-    public function __construct(array $midocoJasperParameterForDisplay = [])
+    public function __construct(?array $midocoJasperParameterForDisplay = null)
     {
         $this
             ->setMidocoJasperParameterForDisplay($midocoJasperParameterForDisplay);
@@ -38,18 +39,22 @@ class GetAllJasperParametersResponse extends AbstractStructBase
      * Get MidocoJasperParameterForDisplay value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoJasperParameterForDisplay[]
      */
-    public function getMidocoJasperParameterForDisplay(): array
+    public function getMidocoJasperParameterForDisplay(): ?array
     {
         return $this->MidocoJasperParameterForDisplay;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoJasperParameterForDisplay method
+     * This method is responsible for validating the value(s) passed to the setMidocoJasperParameterForDisplay method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoJasperParameterForDisplay method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoJasperParameterForDisplayForArrayConstraintsFromSetMidocoJasperParameterForDisplay(array $values = []): string
+    public static function validateMidocoJasperParameterForDisplayForArrayConstraintFromSetMidocoJasperParameterForDisplay(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAllJasperParametersResponseMidocoJasperParameterForDisplayItem) {
@@ -71,10 +76,10 @@ class GetAllJasperParametersResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoJasperParameterForDisplay[] $midocoJasperParameterForDisplay
      * @return \Pggns\MidocoApi\Mis\StructType\GetAllJasperParametersResponse
      */
-    public function setMidocoJasperParameterForDisplay(array $midocoJasperParameterForDisplay = []): self
+    public function setMidocoJasperParameterForDisplay(?array $midocoJasperParameterForDisplay = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoJasperParameterForDisplayArrayErrorMessage = self::validateMidocoJasperParameterForDisplayForArrayConstraintsFromSetMidocoJasperParameterForDisplay($midocoJasperParameterForDisplay))) {
+        if ('' !== ($midocoJasperParameterForDisplayArrayErrorMessage = self::validateMidocoJasperParameterForDisplayForArrayConstraintFromSetMidocoJasperParameterForDisplay($midocoJasperParameterForDisplay))) {
             throw new InvalidArgumentException($midocoJasperParameterForDisplayArrayErrorMessage, __LINE__);
         }
         $this->MidocoJasperParameterForDisplay = $midocoJasperParameterForDisplay;

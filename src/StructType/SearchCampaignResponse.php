@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: searchCampaign --- campaign search
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class SearchCampaignResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class SearchCampaignResponse extends AbstractStructBase
      * - ref: MidocoMisCampaign
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign[]
      */
-    protected array $MidocoMisCampaign = [];
+    protected ?array $MidocoMisCampaign = null;
     /**
      * Constructor method for SearchCampaignResponse
      * @uses SearchCampaignResponse::setMidocoMisCampaign()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign[] $midocoMisCampaign
      */
-    public function __construct(array $midocoMisCampaign = [])
+    public function __construct(?array $midocoMisCampaign = null)
     {
         $this
             ->setMidocoMisCampaign($midocoMisCampaign);
@@ -38,18 +39,22 @@ class SearchCampaignResponse extends AbstractStructBase
      * Get MidocoMisCampaign value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign[]
      */
-    public function getMidocoMisCampaign(): array
+    public function getMidocoMisCampaign(): ?array
     {
         return $this->MidocoMisCampaign;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisCampaign method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisCampaign method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisCampaign method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisCampaignForArrayConstraintsFromSetMidocoMisCampaign(array $values = []): string
+    public static function validateMidocoMisCampaignForArrayConstraintFromSetMidocoMisCampaign(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $searchCampaignResponseMidocoMisCampaignItem) {
@@ -71,10 +76,10 @@ class SearchCampaignResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign[] $midocoMisCampaign
      * @return \Pggns\MidocoApi\Mis\StructType\SearchCampaignResponse
      */
-    public function setMidocoMisCampaign(array $midocoMisCampaign = []): self
+    public function setMidocoMisCampaign(?array $midocoMisCampaign = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisCampaignArrayErrorMessage = self::validateMidocoMisCampaignForArrayConstraintsFromSetMidocoMisCampaign($midocoMisCampaign))) {
+        if ('' !== ($midocoMisCampaignArrayErrorMessage = self::validateMidocoMisCampaignForArrayConstraintFromSetMidocoMisCampaign($midocoMisCampaign))) {
             throw new InvalidArgumentException($midocoMisCampaignArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisCampaign = $midocoMisCampaign;

@@ -11,13 +11,14 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for KeyValue StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class KeyValue extends AbstractStructBase
 {
     /**
      * The value
-     * @var mixed|null
+     * @var string|null
      */
-    protected ?mixed $value = null;
+    protected ?string $value = null;
     /**
      * The key
      * @var string|null
@@ -27,10 +28,10 @@ class KeyValue extends AbstractStructBase
      * Constructor method for KeyValue
      * @uses KeyValue::setValue()
      * @uses KeyValue::setKey()
-     * @param mixed $value
+     * @param string $value
      * @param string $key
      */
-    public function __construct(?mixed $value = null, ?string $key = null)
+    public function __construct(?string $value = null, ?string $key = null)
     {
         $this
             ->setValue($value)
@@ -38,19 +39,23 @@ class KeyValue extends AbstractStructBase
     }
     /**
      * Get value value
-     * @return mixed|null
+     * @return string|null
      */
-    public function getValue(): ?mixed
+    public function getValue(): ?string
     {
         return $this->value;
     }
     /**
      * Set value value
-     * @param mixed $value
+     * @param string $value
      * @return \Pggns\MidocoApi\Mis\StructType\KeyValue
      */
-    public function setValue(?mixed $value = null): self
+    public function setValue(?string $value = null): self
     {
+        // validation for constraint: string
+        if (!is_null($value) && !is_string($value)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($value, true), gettype($value)), __LINE__);
+        }
         $this->value = $value;
         
         return $this;

@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getAttributePositions --- get all the attribut_position records
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetAttributePositionsResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetAttributePositionsResponse extends AbstractStructBase
      * - ref: MidocoAttributePosition
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoAttributePosition[]
      */
-    protected array $MidocoAttributePosition = [];
+    protected ?array $MidocoAttributePosition = null;
     /**
      * Constructor method for GetAttributePositionsResponse
      * @uses GetAttributePositionsResponse::setMidocoAttributePosition()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoAttributePosition[] $midocoAttributePosition
      */
-    public function __construct(array $midocoAttributePosition = [])
+    public function __construct(?array $midocoAttributePosition = null)
     {
         $this
             ->setMidocoAttributePosition($midocoAttributePosition);
@@ -38,18 +39,22 @@ class GetAttributePositionsResponse extends AbstractStructBase
      * Get MidocoAttributePosition value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoAttributePosition[]
      */
-    public function getMidocoAttributePosition(): array
+    public function getMidocoAttributePosition(): ?array
     {
         return $this->MidocoAttributePosition;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoAttributePosition method
+     * This method is responsible for validating the value(s) passed to the setMidocoAttributePosition method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoAttributePosition method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoAttributePositionForArrayConstraintsFromSetMidocoAttributePosition(array $values = []): string
+    public static function validateMidocoAttributePositionForArrayConstraintFromSetMidocoAttributePosition(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAttributePositionsResponseMidocoAttributePositionItem) {
@@ -71,10 +76,10 @@ class GetAttributePositionsResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoAttributePosition[] $midocoAttributePosition
      * @return \Pggns\MidocoApi\Mis\StructType\GetAttributePositionsResponse
      */
-    public function setMidocoAttributePosition(array $midocoAttributePosition = []): self
+    public function setMidocoAttributePosition(?array $midocoAttributePosition = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoAttributePositionArrayErrorMessage = self::validateMidocoAttributePositionForArrayConstraintsFromSetMidocoAttributePosition($midocoAttributePosition))) {
+        if ('' !== ($midocoAttributePositionArrayErrorMessage = self::validateMidocoAttributePositionForArrayConstraintFromSetMidocoAttributePosition($midocoAttributePosition))) {
             throw new InvalidArgumentException($midocoAttributePositionArrayErrorMessage, __LINE__);
         }
         $this->MidocoAttributePosition = $midocoAttributePosition;

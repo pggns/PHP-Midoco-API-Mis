@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for CampaignRowType StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class CampaignRowType extends AbstractStructBase
 {
     /**
@@ -20,13 +21,13 @@ class CampaignRowType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $columnContent = [];
+    protected ?array $columnContent = null;
     /**
      * Constructor method for CampaignRowType
      * @uses CampaignRowType::setColumnContent()
      * @param string[] $columnContent
      */
-    public function __construct(array $columnContent = [])
+    public function __construct(?array $columnContent = null)
     {
         $this
             ->setColumnContent($columnContent);
@@ -35,18 +36,22 @@ class CampaignRowType extends AbstractStructBase
      * Get columnContent value
      * @return string[]
      */
-    public function getColumnContent(): array
+    public function getColumnContent(): ?array
     {
         return $this->columnContent;
     }
     /**
-     * This method is responsible for validating the values passed to the setColumnContent method
+     * This method is responsible for validating the value(s) passed to the setColumnContent method
      * This method is willingly generated in order to preserve the one-line inline validation within the setColumnContent method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateColumnContentForArrayConstraintsFromSetColumnContent(array $values = []): string
+    public static function validateColumnContentForArrayConstraintFromSetColumnContent(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $campaignRowTypeColumnContentItem) {
@@ -68,10 +73,10 @@ class CampaignRowType extends AbstractStructBase
      * @param string[] $columnContent
      * @return \Pggns\MidocoApi\Mis\StructType\CampaignRowType
      */
-    public function setColumnContent(array $columnContent = []): self
+    public function setColumnContent(?array $columnContent = null): self
     {
         // validation for constraint: array
-        if ('' !== ($columnContentArrayErrorMessage = self::validateColumnContentForArrayConstraintsFromSetColumnContent($columnContent))) {
+        if ('' !== ($columnContentArrayErrorMessage = self::validateColumnContentForArrayConstraintFromSetColumnContent($columnContent))) {
             throw new InvalidArgumentException($columnContentArrayErrorMessage, __LINE__);
         }
         $this->columnContent = $columnContent;

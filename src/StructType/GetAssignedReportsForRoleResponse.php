@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getAssignedReportsForRole --- returns the reports that the given org unit and role id can see
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetAssignedReportsForRoleResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetAssignedReportsForRoleResponse extends AbstractStructBase
      * - ref: MidocoMisReport
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[]
      */
-    protected array $MidocoMisReport = [];
+    protected ?array $MidocoMisReport = null;
     /**
      * Constructor method for GetAssignedReportsForRoleResponse
      * @uses GetAssignedReportsForRoleResponse::setMidocoMisReport()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[] $midocoMisReport
      */
-    public function __construct(array $midocoMisReport = [])
+    public function __construct(?array $midocoMisReport = null)
     {
         $this
             ->setMidocoMisReport($midocoMisReport);
@@ -38,18 +39,22 @@ class GetAssignedReportsForRoleResponse extends AbstractStructBase
      * Get MidocoMisReport value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[]
      */
-    public function getMidocoMisReport(): array
+    public function getMidocoMisReport(): ?array
     {
         return $this->MidocoMisReport;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisReport method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisReport method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisReport method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisReportForArrayConstraintsFromSetMidocoMisReport(array $values = []): string
+    public static function validateMidocoMisReportForArrayConstraintFromSetMidocoMisReport(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAssignedReportsForRoleResponseMidocoMisReportItem) {
@@ -71,10 +76,10 @@ class GetAssignedReportsForRoleResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[] $midocoMisReport
      * @return \Pggns\MidocoApi\Mis\StructType\GetAssignedReportsForRoleResponse
      */
-    public function setMidocoMisReport(array $midocoMisReport = []): self
+    public function setMidocoMisReport(?array $midocoMisReport = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisReportArrayErrorMessage = self::validateMidocoMisReportForArrayConstraintsFromSetMidocoMisReport($midocoMisReport))) {
+        if ('' !== ($midocoMisReportArrayErrorMessage = self::validateMidocoMisReportForArrayConstraintFromSetMidocoMisReport($midocoMisReport))) {
             throw new InvalidArgumentException($midocoMisReportArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisReport = $midocoMisReport;

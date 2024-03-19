@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for SearchAssignedSavedReportsResponse StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class SearchAssignedSavedReportsResponse extends AbstractStructBase
 {
     /**
@@ -21,13 +22,13 @@ class SearchAssignedSavedReportsResponse extends AbstractStructBase
      * - ref: system:MidocoSavedReport
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoSavedReport[]
      */
-    protected array $MidocoSavedReport = [];
+    protected ?array $MidocoSavedReport = null;
     /**
      * Constructor method for SearchAssignedSavedReportsResponse
      * @uses SearchAssignedSavedReportsResponse::setMidocoSavedReport()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoSavedReport[] $midocoSavedReport
      */
-    public function __construct(array $midocoSavedReport = [])
+    public function __construct(?array $midocoSavedReport = null)
     {
         $this
             ->setMidocoSavedReport($midocoSavedReport);
@@ -36,18 +37,22 @@ class SearchAssignedSavedReportsResponse extends AbstractStructBase
      * Get MidocoSavedReport value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoSavedReport[]
      */
-    public function getMidocoSavedReport(): array
+    public function getMidocoSavedReport(): ?array
     {
         return $this->MidocoSavedReport;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoSavedReport method
+     * This method is responsible for validating the value(s) passed to the setMidocoSavedReport method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoSavedReport method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoSavedReportForArrayConstraintsFromSetMidocoSavedReport(array $values = []): string
+    public static function validateMidocoSavedReportForArrayConstraintFromSetMidocoSavedReport(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $searchAssignedSavedReportsResponseMidocoSavedReportItem) {
@@ -69,10 +74,10 @@ class SearchAssignedSavedReportsResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoSavedReport[] $midocoSavedReport
      * @return \Pggns\MidocoApi\Mis\StructType\SearchAssignedSavedReportsResponse
      */
-    public function setMidocoSavedReport(array $midocoSavedReport = []): self
+    public function setMidocoSavedReport(?array $midocoSavedReport = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoSavedReportArrayErrorMessage = self::validateMidocoSavedReportForArrayConstraintsFromSetMidocoSavedReport($midocoSavedReport))) {
+        if ('' !== ($midocoSavedReportArrayErrorMessage = self::validateMidocoSavedReportForArrayConstraintFromSetMidocoSavedReport($midocoSavedReport))) {
             throw new InvalidArgumentException($midocoSavedReportArrayErrorMessage, __LINE__);
         }
         $this->MidocoSavedReport = $midocoSavedReport;

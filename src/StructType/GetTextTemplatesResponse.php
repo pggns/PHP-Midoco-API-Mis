@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getTextTemplates --- return a list of text templates, which are available for the OrgUnit
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetTextTemplatesResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetTextTemplatesResponse extends AbstractStructBase
      * - ref: MidocoCampaignTemplate
      * @var \Pggns\MidocoApi\Mis\StructType\CrmCampaignTemplateDTO[]
      */
-    protected array $MidocoCampaignTemplate = [];
+    protected ?array $MidocoCampaignTemplate = null;
     /**
      * Constructor method for GetTextTemplatesResponse
      * @uses GetTextTemplatesResponse::setMidocoCampaignTemplate()
      * @param \Pggns\MidocoApi\Mis\StructType\CrmCampaignTemplateDTO[] $midocoCampaignTemplate
      */
-    public function __construct(array $midocoCampaignTemplate = [])
+    public function __construct(?array $midocoCampaignTemplate = null)
     {
         $this
             ->setMidocoCampaignTemplate($midocoCampaignTemplate);
@@ -38,18 +39,22 @@ class GetTextTemplatesResponse extends AbstractStructBase
      * Get MidocoCampaignTemplate value
      * @return \Pggns\MidocoApi\Mis\StructType\CrmCampaignTemplateDTO[]
      */
-    public function getMidocoCampaignTemplate(): array
+    public function getMidocoCampaignTemplate(): ?array
     {
         return $this->MidocoCampaignTemplate;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoCampaignTemplate method
+     * This method is responsible for validating the value(s) passed to the setMidocoCampaignTemplate method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoCampaignTemplate method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoCampaignTemplateForArrayConstraintsFromSetMidocoCampaignTemplate(array $values = []): string
+    public static function validateMidocoCampaignTemplateForArrayConstraintFromSetMidocoCampaignTemplate(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getTextTemplatesResponseMidocoCampaignTemplateItem) {
@@ -71,10 +76,10 @@ class GetTextTemplatesResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CrmCampaignTemplateDTO[] $midocoCampaignTemplate
      * @return \Pggns\MidocoApi\Mis\StructType\GetTextTemplatesResponse
      */
-    public function setMidocoCampaignTemplate(array $midocoCampaignTemplate = []): self
+    public function setMidocoCampaignTemplate(?array $midocoCampaignTemplate = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoCampaignTemplateArrayErrorMessage = self::validateMidocoCampaignTemplateForArrayConstraintsFromSetMidocoCampaignTemplate($midocoCampaignTemplate))) {
+        if ('' !== ($midocoCampaignTemplateArrayErrorMessage = self::validateMidocoCampaignTemplateForArrayConstraintFromSetMidocoCampaignTemplate($midocoCampaignTemplate))) {
             throw new InvalidArgumentException($midocoCampaignTemplateArrayErrorMessage, __LINE__);
         }
         $this->MidocoCampaignTemplate = $midocoCampaignTemplate;

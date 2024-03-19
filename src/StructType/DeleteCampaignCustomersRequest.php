@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for DeleteCampaignCustomersRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class DeleteCampaignCustomersRequest extends AbstractStructBase
 {
     /**
@@ -21,7 +22,7 @@ class DeleteCampaignCustomersRequest extends AbstractStructBase
      * - ref: MidocoCustomerId
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoCustomerIdType[]
      */
-    protected array $MidocoCustomerId = [];
+    protected ?array $MidocoCustomerId = null;
     /**
      * The campaignId
      * @var int|null
@@ -34,7 +35,7 @@ class DeleteCampaignCustomersRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCustomerIdType[] $midocoCustomerId
      * @param int $campaignId
      */
-    public function __construct(array $midocoCustomerId = [], ?int $campaignId = null)
+    public function __construct(?array $midocoCustomerId = null, ?int $campaignId = null)
     {
         $this
             ->setMidocoCustomerId($midocoCustomerId)
@@ -44,18 +45,22 @@ class DeleteCampaignCustomersRequest extends AbstractStructBase
      * Get MidocoCustomerId value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoCustomerIdType[]
      */
-    public function getMidocoCustomerId(): array
+    public function getMidocoCustomerId(): ?array
     {
         return $this->MidocoCustomerId;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoCustomerId method
+     * This method is responsible for validating the value(s) passed to the setMidocoCustomerId method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoCustomerId method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoCustomerIdForArrayConstraintsFromSetMidocoCustomerId(array $values = []): string
+    public static function validateMidocoCustomerIdForArrayConstraintFromSetMidocoCustomerId(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $deleteCampaignCustomersRequestMidocoCustomerIdItem) {
@@ -77,10 +82,10 @@ class DeleteCampaignCustomersRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCustomerIdType[] $midocoCustomerId
      * @return \Pggns\MidocoApi\Mis\StructType\DeleteCampaignCustomersRequest
      */
-    public function setMidocoCustomerId(array $midocoCustomerId = []): self
+    public function setMidocoCustomerId(?array $midocoCustomerId = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoCustomerIdArrayErrorMessage = self::validateMidocoCustomerIdForArrayConstraintsFromSetMidocoCustomerId($midocoCustomerId))) {
+        if ('' !== ($midocoCustomerIdArrayErrorMessage = self::validateMidocoCustomerIdForArrayConstraintFromSetMidocoCustomerId($midocoCustomerId))) {
             throw new InvalidArgumentException($midocoCustomerIdArrayErrorMessage, __LINE__);
         }
         $this->MidocoCustomerId = $midocoCustomerId;

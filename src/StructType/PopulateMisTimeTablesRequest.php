@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for PopulateMisTimeTablesRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class PopulateMisTimeTablesRequest extends AbstractStructBase
 {
     /**
@@ -21,13 +22,13 @@ class PopulateMisTimeTablesRequest extends AbstractStructBase
      * - ref: MisYear
      * @var \Pggns\MidocoApi\Mis\StructType\MisYear[]
      */
-    protected array $MisYear = [];
+    protected ?array $MisYear = null;
     /**
      * Constructor method for PopulateMisTimeTablesRequest
      * @uses PopulateMisTimeTablesRequest::setMisYear()
      * @param \Pggns\MidocoApi\Mis\StructType\MisYear[] $misYear
      */
-    public function __construct(array $misYear = [])
+    public function __construct(?array $misYear = null)
     {
         $this
             ->setMisYear($misYear);
@@ -36,18 +37,22 @@ class PopulateMisTimeTablesRequest extends AbstractStructBase
      * Get MisYear value
      * @return \Pggns\MidocoApi\Mis\StructType\MisYear[]
      */
-    public function getMisYear(): array
+    public function getMisYear(): ?array
     {
         return $this->MisYear;
     }
     /**
-     * This method is responsible for validating the values passed to the setMisYear method
+     * This method is responsible for validating the value(s) passed to the setMisYear method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMisYear method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMisYearForArrayConstraintsFromSetMisYear(array $values = []): string
+    public static function validateMisYearForArrayConstraintFromSetMisYear(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $populateMisTimeTablesRequestMisYearItem) {
@@ -69,10 +74,10 @@ class PopulateMisTimeTablesRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisYear[] $misYear
      * @return \Pggns\MidocoApi\Mis\StructType\PopulateMisTimeTablesRequest
      */
-    public function setMisYear(array $misYear = []): self
+    public function setMisYear(?array $misYear = null): self
     {
         // validation for constraint: array
-        if ('' !== ($misYearArrayErrorMessage = self::validateMisYearForArrayConstraintsFromSetMisYear($misYear))) {
+        if ('' !== ($misYearArrayErrorMessage = self::validateMisYearForArrayConstraintFromSetMisYear($misYear))) {
             throw new InvalidArgumentException($misYearArrayErrorMessage, __LINE__);
         }
         $this->MisYear = $misYear;

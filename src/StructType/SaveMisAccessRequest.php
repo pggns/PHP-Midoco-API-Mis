@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for SaveMisAccessRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class SaveMisAccessRequest extends AbstractStructBase
 {
     /**
@@ -21,7 +22,7 @@ class SaveMisAccessRequest extends AbstractStructBase
      * - ref: MidocoMisReport
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[]
      */
-    protected array $MidocoMisReport = [];
+    protected ?array $MidocoMisReport = null;
     /**
      * The MidocoMisDimension
      * Meta information extracted from the WSDL
@@ -30,7 +31,7 @@ class SaveMisAccessRequest extends AbstractStructBase
      * - ref: MidocoMisDimension
      * @var \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[]
      */
-    protected array $MidocoMisDimension = [];
+    protected ?array $MidocoMisDimension = null;
     /**
      * The roleId
      * @var int|null
@@ -52,7 +53,7 @@ class SaveMisAccessRequest extends AbstractStructBase
      * @param int $roleId
      * @param string $orgUnit
      */
-    public function __construct(array $midocoMisReport = [], array $midocoMisDimension = [], ?int $roleId = null, ?string $orgUnit = null)
+    public function __construct(?array $midocoMisReport = null, ?array $midocoMisDimension = null, ?int $roleId = null, ?string $orgUnit = null)
     {
         $this
             ->setMidocoMisReport($midocoMisReport)
@@ -64,18 +65,22 @@ class SaveMisAccessRequest extends AbstractStructBase
      * Get MidocoMisReport value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[]
      */
-    public function getMidocoMisReport(): array
+    public function getMidocoMisReport(): ?array
     {
         return $this->MidocoMisReport;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisReport method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisReport method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisReport method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisReportForArrayConstraintsFromSetMidocoMisReport(array $values = []): string
+    public static function validateMidocoMisReportForArrayConstraintFromSetMidocoMisReport(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $saveMisAccessRequestMidocoMisReportItem) {
@@ -97,10 +102,10 @@ class SaveMisAccessRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoMisReport[] $midocoMisReport
      * @return \Pggns\MidocoApi\Mis\StructType\SaveMisAccessRequest
      */
-    public function setMidocoMisReport(array $midocoMisReport = []): self
+    public function setMidocoMisReport(?array $midocoMisReport = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisReportArrayErrorMessage = self::validateMidocoMisReportForArrayConstraintsFromSetMidocoMisReport($midocoMisReport))) {
+        if ('' !== ($midocoMisReportArrayErrorMessage = self::validateMidocoMisReportForArrayConstraintFromSetMidocoMisReport($midocoMisReport))) {
             throw new InvalidArgumentException($midocoMisReportArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisReport = $midocoMisReport;
@@ -127,18 +132,22 @@ class SaveMisAccessRequest extends AbstractStructBase
      * Get MidocoMisDimension value
      * @return \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[]
      */
-    public function getMidocoMisDimension(): array
+    public function getMidocoMisDimension(): ?array
     {
         return $this->MidocoMisDimension;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisDimension method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisDimension method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisDimension method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisDimensionForArrayConstraintsFromSetMidocoMisDimension(array $values = []): string
+    public static function validateMidocoMisDimensionForArrayConstraintFromSetMidocoMisDimension(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $saveMisAccessRequestMidocoMisDimensionItem) {
@@ -160,10 +169,10 @@ class SaveMisAccessRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[] $midocoMisDimension
      * @return \Pggns\MidocoApi\Mis\StructType\SaveMisAccessRequest
      */
-    public function setMidocoMisDimension(array $midocoMisDimension = []): self
+    public function setMidocoMisDimension(?array $midocoMisDimension = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisDimensionArrayErrorMessage = self::validateMidocoMisDimensionForArrayConstraintsFromSetMidocoMisDimension($midocoMisDimension))) {
+        if ('' !== ($midocoMisDimensionArrayErrorMessage = self::validateMidocoMisDimensionForArrayConstraintFromSetMidocoMisDimension($midocoMisDimension))) {
             throw new InvalidArgumentException($midocoMisDimensionArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisDimension = $midocoMisDimension;

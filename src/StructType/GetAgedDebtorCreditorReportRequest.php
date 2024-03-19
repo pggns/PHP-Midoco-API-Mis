@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for GetAgedDebtorCreditorReportRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetAgedDebtorCreditorReportRequest extends AbstractStructBase
 {
     /**
@@ -21,7 +22,7 @@ class GetAgedDebtorCreditorReportRequest extends AbstractStructBase
      * - ref: KeyValue
      * @var \Pggns\MidocoApi\Mis\StructType\KeyValue[]
      */
-    protected array $KeyValue = [];
+    protected ?array $KeyValue = null;
     /**
      * The customerId
      * @var int|null
@@ -41,7 +42,7 @@ class GetAgedDebtorCreditorReportRequest extends AbstractStructBase
      * @param int $customerId
      * @param string $format
      */
-    public function __construct(array $keyValue = [], ?int $customerId = null, ?string $format = null)
+    public function __construct(?array $keyValue = null, ?int $customerId = null, ?string $format = null)
     {
         $this
             ->setKeyValue($keyValue)
@@ -52,18 +53,22 @@ class GetAgedDebtorCreditorReportRequest extends AbstractStructBase
      * Get KeyValue value
      * @return \Pggns\MidocoApi\Mis\StructType\KeyValue[]
      */
-    public function getKeyValue(): array
+    public function getKeyValue(): ?array
     {
         return $this->KeyValue;
     }
     /**
-     * This method is responsible for validating the values passed to the setKeyValue method
+     * This method is responsible for validating the value(s) passed to the setKeyValue method
      * This method is willingly generated in order to preserve the one-line inline validation within the setKeyValue method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateKeyValueForArrayConstraintsFromSetKeyValue(array $values = []): string
+    public static function validateKeyValueForArrayConstraintFromSetKeyValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAgedDebtorCreditorReportRequestKeyValueItem) {
@@ -85,10 +90,10 @@ class GetAgedDebtorCreditorReportRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\KeyValue[] $keyValue
      * @return \Pggns\MidocoApi\Mis\StructType\GetAgedDebtorCreditorReportRequest
      */
-    public function setKeyValue(array $keyValue = []): self
+    public function setKeyValue(?array $keyValue = null): self
     {
         // validation for constraint: array
-        if ('' !== ($keyValueArrayErrorMessage = self::validateKeyValueForArrayConstraintsFromSetKeyValue($keyValue))) {
+        if ('' !== ($keyValueArrayErrorMessage = self::validateKeyValueForArrayConstraintFromSetKeyValue($keyValue))) {
             throw new InvalidArgumentException($keyValueArrayErrorMessage, __LINE__);
         }
         $this->KeyValue = $keyValue;

@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: searchTextTemplate --- searches in crmsd db for a campaign text template
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class SearchTextTemplateResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class SearchTextTemplateResponse extends AbstractStructBase
      * - ref: MidocoTextTemplate
      * @var \Pggns\MidocoApi\Mis\StructType\CrmTemplateDTO[]
      */
-    protected array $MidocoTextTemplate = [];
+    protected ?array $MidocoTextTemplate = null;
     /**
      * Constructor method for SearchTextTemplateResponse
      * @uses SearchTextTemplateResponse::setMidocoTextTemplate()
      * @param \Pggns\MidocoApi\Mis\StructType\CrmTemplateDTO[] $midocoTextTemplate
      */
-    public function __construct(array $midocoTextTemplate = [])
+    public function __construct(?array $midocoTextTemplate = null)
     {
         $this
             ->setMidocoTextTemplate($midocoTextTemplate);
@@ -38,18 +39,22 @@ class SearchTextTemplateResponse extends AbstractStructBase
      * Get MidocoTextTemplate value
      * @return \Pggns\MidocoApi\Mis\StructType\CrmTemplateDTO[]
      */
-    public function getMidocoTextTemplate(): array
+    public function getMidocoTextTemplate(): ?array
     {
         return $this->MidocoTextTemplate;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoTextTemplate method
+     * This method is responsible for validating the value(s) passed to the setMidocoTextTemplate method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoTextTemplate method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoTextTemplateForArrayConstraintsFromSetMidocoTextTemplate(array $values = []): string
+    public static function validateMidocoTextTemplateForArrayConstraintFromSetMidocoTextTemplate(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $searchTextTemplateResponseMidocoTextTemplateItem) {
@@ -71,10 +76,10 @@ class SearchTextTemplateResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CrmTemplateDTO[] $midocoTextTemplate
      * @return \Pggns\MidocoApi\Mis\StructType\SearchTextTemplateResponse
      */
-    public function setMidocoTextTemplate(array $midocoTextTemplate = []): self
+    public function setMidocoTextTemplate(?array $midocoTextTemplate = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoTextTemplateArrayErrorMessage = self::validateMidocoTextTemplateForArrayConstraintsFromSetMidocoTextTemplate($midocoTextTemplate))) {
+        if ('' !== ($midocoTextTemplateArrayErrorMessage = self::validateMidocoTextTemplateForArrayConstraintFromSetMidocoTextTemplate($midocoTextTemplate))) {
             throw new InvalidArgumentException($midocoTextTemplateArrayErrorMessage, __LINE__);
         }
         $this->MidocoTextTemplate = $midocoTextTemplate;

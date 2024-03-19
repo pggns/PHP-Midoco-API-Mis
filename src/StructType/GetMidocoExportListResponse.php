@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for GetMidocoExportListResponse StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetMidocoExportListResponse extends AbstractStructBase
 {
     /**

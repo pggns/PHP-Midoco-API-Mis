@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for CrmPersonTravellerDTO StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class CrmPersonTravellerDTO extends AbstractStructBase
 {
     /**
@@ -154,6 +155,11 @@ class CrmPersonTravellerDTO extends AbstractStructBase
      */
     protected ?bool $hasDisability = null;
     /**
+     * The mailingProhibited
+     * @var bool|null
+     */
+    protected ?bool $mailingProhibited = null;
+    /**
      * The maritalStatus
      * @var string|null
      */
@@ -238,6 +244,7 @@ class CrmPersonTravellerDTO extends AbstractStructBase
      * @uses CrmPersonTravellerDTO::setFacesId()
      * @uses CrmPersonTravellerDTO::setGender()
      * @uses CrmPersonTravellerDTO::setHasDisability()
+     * @uses CrmPersonTravellerDTO::setMailingProhibited()
      * @uses CrmPersonTravellerDTO::setMaritalStatus()
      * @uses CrmPersonTravellerDTO::setMiddleName()
      * @uses CrmPersonTravellerDTO::setMiddleNameNotAvailable()
@@ -277,6 +284,7 @@ class CrmPersonTravellerDTO extends AbstractStructBase
      * @param string $facesId
      * @param int $gender
      * @param bool $hasDisability
+     * @param bool $mailingProhibited
      * @param string $maritalStatus
      * @param string $middleName
      * @param bool $middleNameNotAvailable
@@ -289,7 +297,7 @@ class CrmPersonTravellerDTO extends AbstractStructBase
      * @param int $position
      * @param int $typeId
      */
-    public function __construct(?string $birthday = null, ?int $customerId = null, ?string $expiryDate = null, ?string $forename = null, ?string $idCardNo = null, ?string $idCardType = null, ?string $issueDate = null, ?string $issuePlace = null, ?string $name = null, ?string $nationality = null, ?string $orgUnit = null, ?string $placeOfBirth = null, ?string $salutationId = null, ?string $title = null, ?int $travellerId = null, ?string $travellerType = null, ?int $birthDay_1 = null, ?int $birthMonth = null, ?string $birthName = null, ?int $birthYear = null, ?bool $birthdayNotProvided = null, ?string $contactName = null, ?string $contactPhone = null, ?string $disabilityDescription = null, ?string $email = null, ?string $facesId = null, ?int $gender = null, ?bool $hasDisability = null, ?string $maritalStatus = null, ?string $middleName = null, ?bool $middleNameNotAvailable = null, ?bool $needsBarrierFreeAccess = null, ?string $passportExpiryDate = null, ?string $passportIssueDate = null, ?string $passportIssuePlace = null, ?string $passportNo = null, ?string $phone = null, ?int $position = null, ?int $typeId = null)
+    public function __construct(?string $birthday = null, ?int $customerId = null, ?string $expiryDate = null, ?string $forename = null, ?string $idCardNo = null, ?string $idCardType = null, ?string $issueDate = null, ?string $issuePlace = null, ?string $name = null, ?string $nationality = null, ?string $orgUnit = null, ?string $placeOfBirth = null, ?string $salutationId = null, ?string $title = null, ?int $travellerId = null, ?string $travellerType = null, ?int $birthDay_1 = null, ?int $birthMonth = null, ?string $birthName = null, ?int $birthYear = null, ?bool $birthdayNotProvided = null, ?string $contactName = null, ?string $contactPhone = null, ?string $disabilityDescription = null, ?string $email = null, ?string $facesId = null, ?int $gender = null, ?bool $hasDisability = null, ?bool $mailingProhibited = null, ?string $maritalStatus = null, ?string $middleName = null, ?bool $middleNameNotAvailable = null, ?bool $needsBarrierFreeAccess = null, ?string $passportExpiryDate = null, ?string $passportIssueDate = null, ?string $passportIssuePlace = null, ?string $passportNo = null, ?string $phone = null, ?int $position = null, ?int $typeId = null)
     {
         $this
             ->setBirthday($birthday)
@@ -320,6 +328,7 @@ class CrmPersonTravellerDTO extends AbstractStructBase
             ->setFacesId($facesId)
             ->setGender($gender)
             ->setHasDisability($hasDisability)
+            ->setMailingProhibited($mailingProhibited)
             ->setMaritalStatus($maritalStatus)
             ->setMiddleName($middleName)
             ->setMiddleNameNotAvailable($middleNameNotAvailable)
@@ -973,6 +982,29 @@ class CrmPersonTravellerDTO extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hasDisability, true), gettype($hasDisability)), __LINE__);
         }
         $this->hasDisability = $hasDisability;
+        
+        return $this;
+    }
+    /**
+     * Get mailingProhibited value
+     * @return bool|null
+     */
+    public function getMailingProhibited(): ?bool
+    {
+        return $this->mailingProhibited;
+    }
+    /**
+     * Set mailingProhibited value
+     * @param bool $mailingProhibited
+     * @return \Pggns\MidocoApi\Mis\StructType\CrmPersonTravellerDTO
+     */
+    public function setMailingProhibited(?bool $mailingProhibited = null): self
+    {
+        // validation for constraint: boolean
+        if (!is_null($mailingProhibited) && !is_bool($mailingProhibited)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($mailingProhibited, true), gettype($mailingProhibited)), __LINE__);
+        }
+        $this->mailingProhibited = $mailingProhibited;
         
         return $this;
     }

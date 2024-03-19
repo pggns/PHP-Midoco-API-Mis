@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getCampaignField --- returns the list of (value field key, value field to be displayed) for the values of the criteria in campaigns
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetCampaignFieldValuesResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetCampaignFieldValuesResponse extends AbstractStructBase
      * - ref: MidocoCriteriaValue
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoCriteriaFieldValueType[]
      */
-    protected array $MidocoCriteriaValue = [];
+    protected ?array $MidocoCriteriaValue = null;
     /**
      * Constructor method for GetCampaignFieldValuesResponse
      * @uses GetCampaignFieldValuesResponse::setMidocoCriteriaValue()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCriteriaFieldValueType[] $midocoCriteriaValue
      */
-    public function __construct(array $midocoCriteriaValue = [])
+    public function __construct(?array $midocoCriteriaValue = null)
     {
         $this
             ->setMidocoCriteriaValue($midocoCriteriaValue);
@@ -38,18 +39,22 @@ class GetCampaignFieldValuesResponse extends AbstractStructBase
      * Get MidocoCriteriaValue value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoCriteriaFieldValueType[]
      */
-    public function getMidocoCriteriaValue(): array
+    public function getMidocoCriteriaValue(): ?array
     {
         return $this->MidocoCriteriaValue;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoCriteriaValue method
+     * This method is responsible for validating the value(s) passed to the setMidocoCriteriaValue method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoCriteriaValue method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoCriteriaValueForArrayConstraintsFromSetMidocoCriteriaValue(array $values = []): string
+    public static function validateMidocoCriteriaValueForArrayConstraintFromSetMidocoCriteriaValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCampaignFieldValuesResponseMidocoCriteriaValueItem) {
@@ -71,10 +76,10 @@ class GetCampaignFieldValuesResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCriteriaFieldValueType[] $midocoCriteriaValue
      * @return \Pggns\MidocoApi\Mis\StructType\GetCampaignFieldValuesResponse
      */
-    public function setMidocoCriteriaValue(array $midocoCriteriaValue = []): self
+    public function setMidocoCriteriaValue(?array $midocoCriteriaValue = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoCriteriaValueArrayErrorMessage = self::validateMidocoCriteriaValueForArrayConstraintsFromSetMidocoCriteriaValue($midocoCriteriaValue))) {
+        if ('' !== ($midocoCriteriaValueArrayErrorMessage = self::validateMidocoCriteriaValueForArrayConstraintFromSetMidocoCriteriaValue($midocoCriteriaValue))) {
             throw new InvalidArgumentException($midocoCriteriaValueArrayErrorMessage, __LINE__);
         }
         $this->MidocoCriteriaValue = $midocoCriteriaValue;

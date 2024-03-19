@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for MisCampaignQueryFilterDTO StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class MisCampaignQueryFilterDTO extends AbstractStructBase
 {
     /**
@@ -21,7 +22,7 @@ class MisCampaignQueryFilterDTO extends AbstractStructBase
      * - ref: MidocoMisCampaignCriteria
      * @var \Pggns\MidocoApi\Mis\StructType\MisCampaignCriteriaDTO[]
      */
-    protected array $MidocoMisCampaignCriteria = [];
+    protected ?array $MidocoMisCampaignCriteria = null;
     /**
      * The inSelect
      * @var bool|null
@@ -41,7 +42,7 @@ class MisCampaignQueryFilterDTO extends AbstractStructBase
      * @param bool $inSelect
      * @param string $category
      */
-    public function __construct(array $midocoMisCampaignCriteria = [], ?bool $inSelect = null, ?string $category = null)
+    public function __construct(?array $midocoMisCampaignCriteria = null, ?bool $inSelect = null, ?string $category = null)
     {
         $this
             ->setMidocoMisCampaignCriteria($midocoMisCampaignCriteria)
@@ -52,18 +53,22 @@ class MisCampaignQueryFilterDTO extends AbstractStructBase
      * Get MidocoMisCampaignCriteria value
      * @return \Pggns\MidocoApi\Mis\StructType\MisCampaignCriteriaDTO[]
      */
-    public function getMidocoMisCampaignCriteria(): array
+    public function getMidocoMisCampaignCriteria(): ?array
     {
         return $this->MidocoMisCampaignCriteria;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisCampaignCriteria method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisCampaignCriteria method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisCampaignCriteria method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisCampaignCriteriaForArrayConstraintsFromSetMidocoMisCampaignCriteria(array $values = []): string
+    public static function validateMidocoMisCampaignCriteriaForArrayConstraintFromSetMidocoMisCampaignCriteria(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $misCampaignQueryFilterDTOMidocoMisCampaignCriteriaItem) {
@@ -85,10 +90,10 @@ class MisCampaignQueryFilterDTO extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisCampaignCriteriaDTO[] $midocoMisCampaignCriteria
      * @return \Pggns\MidocoApi\Mis\StructType\MisCampaignQueryFilterDTO
      */
-    public function setMidocoMisCampaignCriteria(array $midocoMisCampaignCriteria = []): self
+    public function setMidocoMisCampaignCriteria(?array $midocoMisCampaignCriteria = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisCampaignCriteriaArrayErrorMessage = self::validateMidocoMisCampaignCriteriaForArrayConstraintsFromSetMidocoMisCampaignCriteria($midocoMisCampaignCriteria))) {
+        if ('' !== ($midocoMisCampaignCriteriaArrayErrorMessage = self::validateMidocoMisCampaignCriteriaForArrayConstraintFromSetMidocoMisCampaignCriteria($midocoMisCampaignCriteria))) {
             throw new InvalidArgumentException($midocoMisCampaignCriteriaArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisCampaignCriteria = $midocoMisCampaignCriteria;

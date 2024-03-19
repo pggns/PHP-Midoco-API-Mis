@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getCampaignLastPage --- gets the MisCustomerList corresponding to a crm campaign and to a given page number
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetCampaignLastPageResponse extends AbstractStructBase
 {
     /**
@@ -23,7 +24,7 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * - ref: MidocoMisCampaignResult
      * @var \Pggns\MidocoApi\Mis\StructType\MisCampaignResultDTO[]
      */
-    protected array $MidocoMisCampaignResult = [];
+    protected ?array $MidocoMisCampaignResult = null;
     /**
      * The MidocoMisCustomerResult
      * Meta information extracted from the WSDL
@@ -32,7 +33,7 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * - ref: MidocoMisCustomerResult
      * @var \Pggns\MidocoApi\Mis\StructType\MisCustomerResultDTO[]
      */
-    protected array $MidocoMisCustomerResult = [];
+    protected ?array $MidocoMisCustomerResult = null;
     /**
      * The MidocoMisCampaign
      * Meta information extracted from the WSDL
@@ -49,7 +50,7 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisCustomerResultDTO[] $midocoMisCustomerResult
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign $midocoMisCampaign
      */
-    public function __construct(array $midocoMisCampaignResult = [], array $midocoMisCustomerResult = [], ?\Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign $midocoMisCampaign = null)
+    public function __construct(?array $midocoMisCampaignResult = null, ?array $midocoMisCustomerResult = null, ?\Pggns\MidocoApi\Mis\StructType\MidocoMisCampaign $midocoMisCampaign = null)
     {
         $this
             ->setMidocoMisCampaignResult($midocoMisCampaignResult)
@@ -60,18 +61,22 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * Get MidocoMisCampaignResult value
      * @return \Pggns\MidocoApi\Mis\StructType\MisCampaignResultDTO[]
      */
-    public function getMidocoMisCampaignResult(): array
+    public function getMidocoMisCampaignResult(): ?array
     {
         return $this->MidocoMisCampaignResult;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisCampaignResult method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisCampaignResult method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisCampaignResult method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisCampaignResultForArrayConstraintsFromSetMidocoMisCampaignResult(array $values = []): string
+    public static function validateMidocoMisCampaignResultForArrayConstraintFromSetMidocoMisCampaignResult(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCampaignLastPageResponseMidocoMisCampaignResultItem) {
@@ -93,10 +98,10 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisCampaignResultDTO[] $midocoMisCampaignResult
      * @return \Pggns\MidocoApi\Mis\StructType\GetCampaignLastPageResponse
      */
-    public function setMidocoMisCampaignResult(array $midocoMisCampaignResult = []): self
+    public function setMidocoMisCampaignResult(?array $midocoMisCampaignResult = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisCampaignResultArrayErrorMessage = self::validateMidocoMisCampaignResultForArrayConstraintsFromSetMidocoMisCampaignResult($midocoMisCampaignResult))) {
+        if ('' !== ($midocoMisCampaignResultArrayErrorMessage = self::validateMidocoMisCampaignResultForArrayConstraintFromSetMidocoMisCampaignResult($midocoMisCampaignResult))) {
             throw new InvalidArgumentException($midocoMisCampaignResultArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisCampaignResult = $midocoMisCampaignResult;
@@ -123,18 +128,22 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * Get MidocoMisCustomerResult value
      * @return \Pggns\MidocoApi\Mis\StructType\MisCustomerResultDTO[]
      */
-    public function getMidocoMisCustomerResult(): array
+    public function getMidocoMisCustomerResult(): ?array
     {
         return $this->MidocoMisCustomerResult;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisCustomerResult method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisCustomerResult method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisCustomerResult method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisCustomerResultForArrayConstraintsFromSetMidocoMisCustomerResult(array $values = []): string
+    public static function validateMidocoMisCustomerResultForArrayConstraintFromSetMidocoMisCustomerResult(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCampaignLastPageResponseMidocoMisCustomerResultItem) {
@@ -156,10 +165,10 @@ class GetCampaignLastPageResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisCustomerResultDTO[] $midocoMisCustomerResult
      * @return \Pggns\MidocoApi\Mis\StructType\GetCampaignLastPageResponse
      */
-    public function setMidocoMisCustomerResult(array $midocoMisCustomerResult = []): self
+    public function setMidocoMisCustomerResult(?array $midocoMisCustomerResult = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisCustomerResultArrayErrorMessage = self::validateMidocoMisCustomerResultForArrayConstraintsFromSetMidocoMisCustomerResult($midocoMisCustomerResult))) {
+        if ('' !== ($midocoMisCustomerResultArrayErrorMessage = self::validateMidocoMisCustomerResultForArrayConstraintFromSetMidocoMisCustomerResult($midocoMisCustomerResult))) {
             throw new InvalidArgumentException($midocoMisCustomerResultArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisCustomerResult = $midocoMisCustomerResult;

@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for RowMetadataType StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class RowMetadataType extends AbstractStructBase
 {
     /**
@@ -21,7 +22,7 @@ class RowMetadataType extends AbstractStructBase
      * - ref: MidocoCampaignField
      * @var \Pggns\MidocoApi\Mis\StructType\CampaignFieldType[]
      */
-    protected array $MidocoCampaignField = [];
+    protected ?array $MidocoCampaignField = null;
     /**
      * The noOfColumns
      * @var int|null
@@ -34,7 +35,7 @@ class RowMetadataType extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CampaignFieldType[] $midocoCampaignField
      * @param int $noOfColumns
      */
-    public function __construct(array $midocoCampaignField = [], ?int $noOfColumns = null)
+    public function __construct(?array $midocoCampaignField = null, ?int $noOfColumns = null)
     {
         $this
             ->setMidocoCampaignField($midocoCampaignField)
@@ -44,18 +45,22 @@ class RowMetadataType extends AbstractStructBase
      * Get MidocoCampaignField value
      * @return \Pggns\MidocoApi\Mis\StructType\CampaignFieldType[]
      */
-    public function getMidocoCampaignField(): array
+    public function getMidocoCampaignField(): ?array
     {
         return $this->MidocoCampaignField;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoCampaignField method
+     * This method is responsible for validating the value(s) passed to the setMidocoCampaignField method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoCampaignField method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoCampaignFieldForArrayConstraintsFromSetMidocoCampaignField(array $values = []): string
+    public static function validateMidocoCampaignFieldForArrayConstraintFromSetMidocoCampaignField(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $rowMetadataTypeMidocoCampaignFieldItem) {
@@ -77,10 +82,10 @@ class RowMetadataType extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\CampaignFieldType[] $midocoCampaignField
      * @return \Pggns\MidocoApi\Mis\StructType\RowMetadataType
      */
-    public function setMidocoCampaignField(array $midocoCampaignField = []): self
+    public function setMidocoCampaignField(?array $midocoCampaignField = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoCampaignFieldArrayErrorMessage = self::validateMidocoCampaignFieldForArrayConstraintsFromSetMidocoCampaignField($midocoCampaignField))) {
+        if ('' !== ($midocoCampaignFieldArrayErrorMessage = self::validateMidocoCampaignFieldForArrayConstraintFromSetMidocoCampaignField($midocoCampaignField))) {
             throw new InvalidArgumentException($midocoCampaignFieldArrayErrorMessage, __LINE__);
         }
         $this->MidocoCampaignField = $midocoCampaignField;

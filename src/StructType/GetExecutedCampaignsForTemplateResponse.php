@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for GetExecutedCampaignsForTemplateResponse StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetExecutedCampaignsForTemplateResponse extends AbstractStructBase
 {
     /**
@@ -21,13 +22,13 @@ class GetExecutedCampaignsForTemplateResponse extends AbstractStructBase
      * - ref: MidocoCampaignExecutedFromTemplate
      * @var \Pggns\MidocoApi\Mis\StructType\MidocoCampaignExecutedFromTemplateType[]
      */
-    protected array $MidocoCampaignExecutedFromTemplate = [];
+    protected ?array $MidocoCampaignExecutedFromTemplate = null;
     /**
      * Constructor method for GetExecutedCampaignsForTemplateResponse
      * @uses GetExecutedCampaignsForTemplateResponse::setMidocoCampaignExecutedFromTemplate()
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCampaignExecutedFromTemplateType[] $midocoCampaignExecutedFromTemplate
      */
-    public function __construct(array $midocoCampaignExecutedFromTemplate = [])
+    public function __construct(?array $midocoCampaignExecutedFromTemplate = null)
     {
         $this
             ->setMidocoCampaignExecutedFromTemplate($midocoCampaignExecutedFromTemplate);
@@ -36,18 +37,22 @@ class GetExecutedCampaignsForTemplateResponse extends AbstractStructBase
      * Get MidocoCampaignExecutedFromTemplate value
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoCampaignExecutedFromTemplateType[]
      */
-    public function getMidocoCampaignExecutedFromTemplate(): array
+    public function getMidocoCampaignExecutedFromTemplate(): ?array
     {
         return $this->MidocoCampaignExecutedFromTemplate;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoCampaignExecutedFromTemplate method
+     * This method is responsible for validating the value(s) passed to the setMidocoCampaignExecutedFromTemplate method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoCampaignExecutedFromTemplate method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoCampaignExecutedFromTemplateForArrayConstraintsFromSetMidocoCampaignExecutedFromTemplate(array $values = []): string
+    public static function validateMidocoCampaignExecutedFromTemplateForArrayConstraintFromSetMidocoCampaignExecutedFromTemplate(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getExecutedCampaignsForTemplateResponseMidocoCampaignExecutedFromTemplateItem) {
@@ -69,10 +74,10 @@ class GetExecutedCampaignsForTemplateResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MidocoCampaignExecutedFromTemplateType[] $midocoCampaignExecutedFromTemplate
      * @return \Pggns\MidocoApi\Mis\StructType\GetExecutedCampaignsForTemplateResponse
      */
-    public function setMidocoCampaignExecutedFromTemplate(array $midocoCampaignExecutedFromTemplate = []): self
+    public function setMidocoCampaignExecutedFromTemplate(?array $midocoCampaignExecutedFromTemplate = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoCampaignExecutedFromTemplateArrayErrorMessage = self::validateMidocoCampaignExecutedFromTemplateForArrayConstraintsFromSetMidocoCampaignExecutedFromTemplate($midocoCampaignExecutedFromTemplate))) {
+        if ('' !== ($midocoCampaignExecutedFromTemplateArrayErrorMessage = self::validateMidocoCampaignExecutedFromTemplateForArrayConstraintFromSetMidocoCampaignExecutedFromTemplate($midocoCampaignExecutedFromTemplate))) {
             throw new InvalidArgumentException($midocoCampaignExecutedFromTemplateArrayErrorMessage, __LINE__);
         }
         $this->MidocoCampaignExecutedFromTemplate = $midocoCampaignExecutedFromTemplate;

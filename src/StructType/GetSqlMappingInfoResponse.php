@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getSqlMappingInfo --- returns the list of mappings between the sql type ids and sql type names
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetSqlMappingInfoResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetSqlMappingInfoResponse extends AbstractStructBase
      * - ref: SqlMappingInfo
      * @var \Pggns\MidocoApi\Mis\StructType\SqlMappingInfoType[]
      */
-    protected array $SqlMappingInfo = [];
+    protected ?array $SqlMappingInfo = null;
     /**
      * Constructor method for GetSqlMappingInfoResponse
      * @uses GetSqlMappingInfoResponse::setSqlMappingInfo()
      * @param \Pggns\MidocoApi\Mis\StructType\SqlMappingInfoType[] $sqlMappingInfo
      */
-    public function __construct(array $sqlMappingInfo = [])
+    public function __construct(?array $sqlMappingInfo = null)
     {
         $this
             ->setSqlMappingInfo($sqlMappingInfo);
@@ -38,18 +39,22 @@ class GetSqlMappingInfoResponse extends AbstractStructBase
      * Get SqlMappingInfo value
      * @return \Pggns\MidocoApi\Mis\StructType\SqlMappingInfoType[]
      */
-    public function getSqlMappingInfo(): array
+    public function getSqlMappingInfo(): ?array
     {
         return $this->SqlMappingInfo;
     }
     /**
-     * This method is responsible for validating the values passed to the setSqlMappingInfo method
+     * This method is responsible for validating the value(s) passed to the setSqlMappingInfo method
      * This method is willingly generated in order to preserve the one-line inline validation within the setSqlMappingInfo method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSqlMappingInfoForArrayConstraintsFromSetSqlMappingInfo(array $values = []): string
+    public static function validateSqlMappingInfoForArrayConstraintFromSetSqlMappingInfo(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getSqlMappingInfoResponseSqlMappingInfoItem) {
@@ -71,10 +76,10 @@ class GetSqlMappingInfoResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\SqlMappingInfoType[] $sqlMappingInfo
      * @return \Pggns\MidocoApi\Mis\StructType\GetSqlMappingInfoResponse
      */
-    public function setSqlMappingInfo(array $sqlMappingInfo = []): self
+    public function setSqlMappingInfo(?array $sqlMappingInfo = null): self
     {
         // validation for constraint: array
-        if ('' !== ($sqlMappingInfoArrayErrorMessage = self::validateSqlMappingInfoForArrayConstraintsFromSetSqlMappingInfo($sqlMappingInfo))) {
+        if ('' !== ($sqlMappingInfoArrayErrorMessage = self::validateSqlMappingInfoForArrayConstraintFromSetSqlMappingInfo($sqlMappingInfo))) {
             throw new InvalidArgumentException($sqlMappingInfoArrayErrorMessage, __LINE__);
         }
         $this->SqlMappingInfo = $sqlMappingInfo;

@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for MidocoJasperParameterValue StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class MidocoJasperParameterValue extends AbstractStructBase
 {
     /**
@@ -19,7 +20,7 @@ class MidocoJasperParameterValue extends AbstractStructBase
      * - maxOccurs: unbounded
      * @var \Pggns\MidocoApi\Mis\StructType\ParameterValue[]
      */
-    protected array $ParameterValue = [];
+    protected ?array $ParameterValue = null;
     /**
      * The paramId
      * @var int|null
@@ -32,7 +33,7 @@ class MidocoJasperParameterValue extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\ParameterValue[] $parameterValue
      * @param int $paramId
      */
-    public function __construct(array $parameterValue = [], ?int $paramId = null)
+    public function __construct(?array $parameterValue = null, ?int $paramId = null)
     {
         $this
             ->setParameterValue($parameterValue)
@@ -42,18 +43,22 @@ class MidocoJasperParameterValue extends AbstractStructBase
      * Get ParameterValue value
      * @return \Pggns\MidocoApi\Mis\StructType\ParameterValue[]
      */
-    public function getParameterValue(): array
+    public function getParameterValue(): ?array
     {
         return $this->ParameterValue;
     }
     /**
-     * This method is responsible for validating the values passed to the setParameterValue method
+     * This method is responsible for validating the value(s) passed to the setParameterValue method
      * This method is willingly generated in order to preserve the one-line inline validation within the setParameterValue method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateParameterValueForArrayConstraintsFromSetParameterValue(array $values = []): string
+    public static function validateParameterValueForArrayConstraintFromSetParameterValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $midocoJasperParameterValueParameterValueItem) {
@@ -75,10 +80,10 @@ class MidocoJasperParameterValue extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\ParameterValue[] $parameterValue
      * @return \Pggns\MidocoApi\Mis\StructType\MidocoJasperParameterValue
      */
-    public function setParameterValue(array $parameterValue = []): self
+    public function setParameterValue(?array $parameterValue = null): self
     {
         // validation for constraint: array
-        if ('' !== ($parameterValueArrayErrorMessage = self::validateParameterValueForArrayConstraintsFromSetParameterValue($parameterValue))) {
+        if ('' !== ($parameterValueArrayErrorMessage = self::validateParameterValueForArrayConstraintFromSetParameterValue($parameterValue))) {
             throw new InvalidArgumentException($parameterValueArrayErrorMessage, __LINE__);
         }
         $this->ParameterValue = $parameterValue;

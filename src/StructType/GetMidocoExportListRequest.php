@@ -11,6 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for GetMidocoExportListRequest StructType
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetMidocoExportListRequest extends AbstractStructBase
 {
     /**
@@ -18,9 +19,9 @@ class GetMidocoExportListRequest extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - maxOccurs: unbounded
      * - minOccurs: 0
-     * @var mixed[]
+     * @var string[]
      */
-    protected array $dtos = [];
+    protected ?array $dtos = null;
     /**
      * The KeyValue
      * Meta information extracted from the WSDL
@@ -29,7 +30,7 @@ class GetMidocoExportListRequest extends AbstractStructBase
      * - ref: KeyValue
      * @var \Pggns\MidocoApi\Mis\StructType\KeyValue[]
      */
-    protected array $KeyValue = [];
+    protected ?array $KeyValue = null;
     /**
      * The dtoClassName
      * @var string|null
@@ -64,7 +65,7 @@ class GetMidocoExportListRequest extends AbstractStructBase
      * @uses GetMidocoExportListRequest::setFormat()
      * @uses GetMidocoExportListRequest::setEmailFile()
      * @uses GetMidocoExportListRequest::setAccountId4Email()
-     * @param mixed[] $dtos
+     * @param string[] $dtos
      * @param \Pggns\MidocoApi\Mis\StructType\KeyValue[] $keyValue
      * @param string $dtoClassName
      * @param string $reportName
@@ -72,7 +73,7 @@ class GetMidocoExportListRequest extends AbstractStructBase
      * @param bool $emailFile
      * @param string $accountId4Email
      */
-    public function __construct(array $dtos = [], array $keyValue = [], ?string $dtoClassName = null, ?string $reportName = null, ?string $format = null, ?bool $emailFile = null, ?string $accountId4Email = null)
+    public function __construct(?array $dtos = null, ?array $keyValue = null, ?string $dtoClassName = null, ?string $reportName = null, ?string $format = null, ?bool $emailFile = null, ?string $accountId4Email = null)
     {
         $this
             ->setDtos($dtos)
@@ -85,30 +86,34 @@ class GetMidocoExportListRequest extends AbstractStructBase
     }
     /**
      * Get dtos value
-     * @return mixed[]
+     * @return string[]
      */
-    public function getDtos(): array
+    public function getDtos(): ?array
     {
         return $this->dtos;
     }
     /**
-     * This method is responsible for validating the values passed to the setDtos method
+     * This method is responsible for validating the value(s) passed to the setDtos method
      * This method is willingly generated in order to preserve the one-line inline validation within the setDtos method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDtosForArrayConstraintsFromSetDtos(array $values = []): string
+    public static function validateDtosForArrayConstraintFromSetDtos(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getMidocoExportListRequestDtosItem) {
             // validation for constraint: itemType
-            if (false) {
+            if (!is_string($getMidocoExportListRequestDtosItem)) {
                 $invalidValues[] = is_object($getMidocoExportListRequestDtosItem) ? get_class($getMidocoExportListRequestDtosItem) : sprintf('%s(%s)', gettype($getMidocoExportListRequestDtosItem), var_export($getMidocoExportListRequestDtosItem, true));
             }
         }
         if (!empty($invalidValues)) {
-            $message = sprintf('The dtos property can only contain items of type mixed, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+            $message = sprintf('The dtos property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
         }
         unset($invalidValues);
         
@@ -117,13 +122,13 @@ class GetMidocoExportListRequest extends AbstractStructBase
     /**
      * Set dtos value
      * @throws InvalidArgumentException
-     * @param mixed[] $dtos
+     * @param string[] $dtos
      * @return \Pggns\MidocoApi\Mis\StructType\GetMidocoExportListRequest
      */
-    public function setDtos(array $dtos = []): self
+    public function setDtos(?array $dtos = null): self
     {
         // validation for constraint: array
-        if ('' !== ($dtosArrayErrorMessage = self::validateDtosForArrayConstraintsFromSetDtos($dtos))) {
+        if ('' !== ($dtosArrayErrorMessage = self::validateDtosForArrayConstraintFromSetDtos($dtos))) {
             throw new InvalidArgumentException($dtosArrayErrorMessage, __LINE__);
         }
         $this->dtos = $dtos;
@@ -133,14 +138,14 @@ class GetMidocoExportListRequest extends AbstractStructBase
     /**
      * Add item to dtos value
      * @throws InvalidArgumentException
-     * @param mixed $item
+     * @param string $item
      * @return \Pggns\MidocoApi\Mis\StructType\GetMidocoExportListRequest
      */
-    public function addToDtos(mixed $item): self
+    public function addToDtos(string $item): self
     {
         // validation for constraint: itemType
-        if (false) {
-            throw new InvalidArgumentException(sprintf('The dtos property can only contain items of type mixed, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        if (!is_string($item)) {
+            throw new InvalidArgumentException(sprintf('The dtos property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->dtos[] = $item;
         
@@ -150,18 +155,22 @@ class GetMidocoExportListRequest extends AbstractStructBase
      * Get KeyValue value
      * @return \Pggns\MidocoApi\Mis\StructType\KeyValue[]
      */
-    public function getKeyValue(): array
+    public function getKeyValue(): ?array
     {
         return $this->KeyValue;
     }
     /**
-     * This method is responsible for validating the values passed to the setKeyValue method
+     * This method is responsible for validating the value(s) passed to the setKeyValue method
      * This method is willingly generated in order to preserve the one-line inline validation within the setKeyValue method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateKeyValueForArrayConstraintsFromSetKeyValue(array $values = []): string
+    public static function validateKeyValueForArrayConstraintFromSetKeyValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getMidocoExportListRequestKeyValueItem) {
@@ -183,10 +192,10 @@ class GetMidocoExportListRequest extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\KeyValue[] $keyValue
      * @return \Pggns\MidocoApi\Mis\StructType\GetMidocoExportListRequest
      */
-    public function setKeyValue(array $keyValue = []): self
+    public function setKeyValue(?array $keyValue = null): self
     {
         // validation for constraint: array
-        if ('' !== ($keyValueArrayErrorMessage = self::validateKeyValueForArrayConstraintsFromSetKeyValue($keyValue))) {
+        if ('' !== ($keyValueArrayErrorMessage = self::validateKeyValueForArrayConstraintFromSetKeyValue($keyValue))) {
             throw new InvalidArgumentException($keyValueArrayErrorMessage, __LINE__);
         }
         $this->KeyValue = $keyValue;

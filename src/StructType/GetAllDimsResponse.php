@@ -13,6 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: getAllDimsForRole --- returns all the dimensions for a role id and org unit
  * @subpackage Structs
  */
+#[\AllowDynamicProperties]
 class GetAllDimsResponse extends AbstractStructBase
 {
     /**
@@ -23,13 +24,13 @@ class GetAllDimsResponse extends AbstractStructBase
      * - ref: MidocoMisDimension
      * @var \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[]
      */
-    protected array $MidocoMisDimension = [];
+    protected ?array $MidocoMisDimension = null;
     /**
      * Constructor method for GetAllDimsResponse
      * @uses GetAllDimsResponse::setMidocoMisDimension()
      * @param \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[] $midocoMisDimension
      */
-    public function __construct(array $midocoMisDimension = [])
+    public function __construct(?array $midocoMisDimension = null)
     {
         $this
             ->setMidocoMisDimension($midocoMisDimension);
@@ -38,18 +39,22 @@ class GetAllDimsResponse extends AbstractStructBase
      * Get MidocoMisDimension value
      * @return \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[]
      */
-    public function getMidocoMisDimension(): array
+    public function getMidocoMisDimension(): ?array
     {
         return $this->MidocoMisDimension;
     }
     /**
-     * This method is responsible for validating the values passed to the setMidocoMisDimension method
+     * This method is responsible for validating the value(s) passed to the setMidocoMisDimension method
      * This method is willingly generated in order to preserve the one-line inline validation within the setMidocoMisDimension method
+     * This has to validate that each item contained by the array match the itemType constraint
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMidocoMisDimensionForArrayConstraintsFromSetMidocoMisDimension(array $values = []): string
+    public static function validateMidocoMisDimensionForArrayConstraintFromSetMidocoMisDimension(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAllDimsResponseMidocoMisDimensionItem) {
@@ -71,10 +76,10 @@ class GetAllDimsResponse extends AbstractStructBase
      * @param \Pggns\MidocoApi\Mis\StructType\MisDimensionDTO[] $midocoMisDimension
      * @return \Pggns\MidocoApi\Mis\StructType\GetAllDimsResponse
      */
-    public function setMidocoMisDimension(array $midocoMisDimension = []): self
+    public function setMidocoMisDimension(?array $midocoMisDimension = null): self
     {
         // validation for constraint: array
-        if ('' !== ($midocoMisDimensionArrayErrorMessage = self::validateMidocoMisDimensionForArrayConstraintsFromSetMidocoMisDimension($midocoMisDimension))) {
+        if ('' !== ($midocoMisDimensionArrayErrorMessage = self::validateMidocoMisDimensionForArrayConstraintFromSetMidocoMisDimension($midocoMisDimension))) {
             throw new InvalidArgumentException($midocoMisDimensionArrayErrorMessage, __LINE__);
         }
         $this->MidocoMisDimension = $midocoMisDimension;
